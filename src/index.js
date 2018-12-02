@@ -4,6 +4,7 @@ import './index.css'
 
 import SubmitForm from './SubmitForm';
 import List from './List';
+import DoneList from './DoneList';
 
 
 // const App = () => {
@@ -15,11 +16,14 @@ class App extends React.Component {
         super(props);
         this.state = {
             list: [],
+            done: [],
             input: '',
         }
         this.handlerBtnSubmit = this.handlerBtnSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleDone = this.handleDone.bind(this);
+        this.handleDoneDelete = this.handleDoneDelete.bind(this);
 
     }
 
@@ -30,7 +34,7 @@ class App extends React.Component {
             list: newItems,
             input: '',
         });
-        console.log(this.state.list);
+        // console.log(this.state.list);
     }
 
     handleChange(e) {
@@ -47,6 +51,22 @@ class App extends React.Component {
         })
     }
 
+    handleDone(item) {
+        let doneList = this.state.list.filter(listItem => listItem === item);
+        let newList = this.state.list.filter(listItem => listItem !== item);
+        this.setState({
+            list: newList,
+            done: [...this.state.done, ...doneList],
+        });
+        console.log(this.state);
+    }
+
+    handleDoneDelete(item) {
+        let newDoneList = this.state.done.filter(listItem => listItem !== item);
+        this.setState({
+            done: newDoneList,
+        })
+    }
 
 
     render() {
@@ -59,11 +79,19 @@ class App extends React.Component {
                     typing={this.handleChange}>
                 </SubmitForm>
                 <div className="listContainer">
-                    <h3 className="listContainer__header">ToDo:</h3>
+                    <h3 className="listContainer__header listHeader">ToDo:</h3>
                     <List
                         deleteItem={this.handleDelete}
+                        doneItem={this.handleDone}
                         listArr={this.state.list}>
                     </List>
+                </div>
+                <div className="doneListContainer">
+                    <h3 className="DoneListContainer__header listHeader">Done:</h3>
+                    <DoneList
+                        doneArr={this.state.done}
+                        deleteItem={this.handleDoneDelete}>    
+                    </DoneList>
                 </div>
             </div>
         )

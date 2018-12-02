@@ -1,8 +1,15 @@
-body {
+
+html, body {
     height: 100vh;
     background: lightcoral;
     overflow: hidden;
+    box-sizing: border-box;
 }
+
+* {
+    box-sizing: inherit;
+}
+
 .container {
     width: 500px;
     height: 500px;
@@ -10,7 +17,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);    
+    transform: translate(-50%, -50%);
 }
 
 .submit {
@@ -25,17 +32,17 @@ body {
 
 .listContainer {
     border: 2px solid goldenrod;
-    width: 50%;
+    width: 49.5%;
     position: absolute;
     left: 0;
 }
 
-.listContainer__header {
+.listHeader {
     text-align: center;
 }
 
 .listItem {
-    background-color:rgba(209, 148, 120, 0.596);
+    background-color: rgba(209, 148, 120, 0.596);
     padding: 10px;
     list-style-type: none;
     border: 2px solid sandybrown;
@@ -50,15 +57,26 @@ body {
     overflow: hidden;
     padding: 5px;
 }
-.listItem a{
+
+li a {
     text-decoration: none;
-    /* user-select: none; */
-    position: absolute;
-    left: 55%;
-    display: inline-block;
     padding: 5px;
 
 }
+
+.listDeleteLink {
+    /* user-select: none; */
+    position: absolute;
+    left: 50%;
+    display: inline-block;
+}
+
+.listDoneLink {
+    position: absolute;
+    left: 75%;
+    display: inline-block;
+}
+
 .listItemDelete {
     /* padding: 5px; */
     border: 2px solid firebrick;
@@ -67,5 +85,21 @@ body {
     background: firebrick;
     text-align: center;
     padding: 5px;
-    
+
+}
+
+.listItemDone {
+    border: 2px solid firebrick;
+    border-radius: 15%;
+    color: whitesmoke;
+    background-color: blue;
+    text-align: center;
+    padding: 5px;
+}
+
+.doneListContainer {
+    width: 49.5%;
+    position: absolute;
+    right: 0;
+    border: 2px solid gold;
 }

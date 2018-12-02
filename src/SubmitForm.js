@@ -7,6 +7,7 @@ function SubmitForm(props) {
         <div className="submit">
             <input 
                 type="text" 
+                autoFocus={true}
                 onChange={props.typing} 
                 value={props.inputVal}/>
             <button 
