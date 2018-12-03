@@ -7,7 +7,7 @@ function DoneList(props) {
                 className="listItem"
                 key={Math.random()}>
                     <span className="listItemName">{listItem}</span>
-                    <a className="listDeleteLink" href="#" ><span className="listItemDelete" onClick={() => props.deleteItem(listItem)}>Delete</span></a>
+                    <a className="listDeleteLink listsBtns" href="#" ><span className="listItemDelete" onClick={() => props.deleteItem(listItem)}>Delete</span></a>
             </li>
         )
     });

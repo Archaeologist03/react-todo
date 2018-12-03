@@ -18,12 +18,15 @@ class App extends React.Component {
             list: [],
             done: [],
             input: '',
+            wasBtnClicked: false,
         }
         this.handlerBtnSubmit = this.handlerBtnSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleDone = this.handleDone.bind(this);
         this.handleDoneDelete = this.handleDoneDelete.bind(this);
+        this.handleInputEnter = this.handleInputEnter.bind(this);
+
 
     }
 
@@ -33,9 +36,20 @@ class App extends React.Component {
         this.setState({
             list: newItems,
             input: '',
-        });
-        // console.log(this.state.list);
+            wasBtnClicked: !this.state.wasBtnClicked,
+        });        
     }
+
+    handleInputEnter(e) {
+        if (e.key === 'Enter') {
+            let newItems = [...this.state.list, this.state.input];
+            this.setState({
+                list: newItems,
+                input: '',
+            });
+        }
+    }
+
 
     handleChange(e) {
         let typed = e.target.value;
@@ -68,6 +82,7 @@ class App extends React.Component {
         })
     }
 
+ 
 
     render() {
 
@@ -76,7 +91,8 @@ class App extends React.Component {
                 <SubmitForm 
                     click={this.handlerBtnSubmit} 
                     inputVal={this.state.input}
-                    typing={this.handleChange}>
+                    typing={this.handleChange}
+                    inputEnter={this.handleInputEnter}>
                 </SubmitForm>
                 <div className="listContainer">
                     <h3 className="listContainer__header listHeader">ToDo:</h3>
