@@ -144,6 +144,12 @@ li a {
     padding: 5px;
     backface-visibility: hidden;
 }
+button {
+    text-decoration: none;
+    padding: 5px;
+    backface-visibility: hidden;
+}
+
 .listsBtns {
     transition: .3s ease-in-out;
 

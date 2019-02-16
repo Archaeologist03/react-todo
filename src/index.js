@@ -1,123 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 
-import SubmitForm from './SubmitForm';
-import List from './List';
-import DoneList from './DoneList';
+import appReducer from './store/reducers/app';
 
+import App from './App';
+import './index.css';
 
-// const App = () => {
-//     return <div>Hi there!</div>
-// }
+const rootReducer = combineReducers({
+  app: appReducer,
+});
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            list: [],
-            done: [],
-            input: '',
-            wasBtnClicked: false,
-        }
-        this.handlerBtnSubmit = this.handlerBtnSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleDone = this.handleDone.bind(this);
-        this.handleDoneDelete = this.handleDoneDelete.bind(this);
-        this.handleInputEnter = this.handleInputEnter.bind(this);
-
-
-    }
-
-    handlerBtnSubmit(e) {
-        e.preventDefault();
-        let newItems = [...this.state.list, this.state.input];
-        this.setState({
-            list: newItems,
-            input: '',
-            wasBtnClicked: !this.state.wasBtnClicked,
-        });        
-    }
-
-    handleInputEnter(e) {
-        if (e.key === 'Enter') {
-            let newItems = [...this.state.list, this.state.input];
-            this.setState({
-                list: newItems,
-                input: '',
-            });
-        }
-    }
-
-
-    handleChange(e) {
-        let typed = e.target.value;
-        this.setState({
-            input: typed,
-        })
-    }
-
-    handleDelete(item) {
-        let newList = this.state.list.filter(listItem => listItem !== item);
-        this.setState({
-            list: newList,
-        })
-    }
-
-    handleDone(item) {
-        let doneList = this.state.list.filter(listItem => listItem === item);
-        let newList = this.state.list.filter(listItem => listItem !== item);
-        this.setState({
-            list: newList,
-            done: [...this.state.done, ...doneList],
-        });
-        console.log(this.state);
-    }
-
-    handleDoneDelete(item) {
-        let newDoneList = this.state.done.filter(listItem => listItem !== item);
-        this.setState({
-            done: newDoneList,
-        })
-    }
-
- 
-
-    render() {
-
-        return (
-            <div className="container">
-                <SubmitForm 
-                    click={this.handlerBtnSubmit} 
-                    inputVal={this.state.input}
-                    typing={this.handleChange}
-                    inputEnter={this.handleInputEnter}>
-                </SubmitForm>
-                <div className="listContainer">
-                    <h3 className="listContainer__header listHeader">ToDo:</h3>
-                    <List
-                        deleteItem={this.handleDelete}
-                        doneItem={this.handleDone}
-                        listArr={this.state.list}>
-                    </List>
-                </div>
-                <div className="doneListContainer">
-                    <h3 className="DoneListContainer__header listHeader">Done:</h3>
-                    <DoneList
-                        doneArr={this.state.done}
-                        deleteItem={this.handleDoneDelete}>    
-                    </DoneList>
-                </div>
-            </div>
-        )
-    }
-
-}
-
-
+const store = createStore(rootReducer);
 
 ReactDOM.render(
-    <App />,
-    document.querySelector("#root")
-)
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector('#root'),
+);
