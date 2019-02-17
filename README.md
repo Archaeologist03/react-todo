@@ -1,7 +1,7 @@
-### `git clone https://github.com/Archaeologist03/react-todo`
+## `git clone https://github.com/Archaeologist03/react-todo`
 To clone repo.
 
-### `npm install`
+# `npm install`
 To install needed packages.
 
 ### `npm start`
