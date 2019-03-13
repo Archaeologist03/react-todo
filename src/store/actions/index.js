@@ -4,4 +4,5 @@ export {
   deleteFromList,
   addToDone,
   deleteFromDone,
+  updateInitialState
 } from './app';

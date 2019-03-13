@@ -6,6 +6,20 @@ const initialState = {
   done: [],
 };
 
+const updateInitialState = (state, action) => {
+  if (action.type === actionTypes.UPDATE_INITIAL_STATE) {
+    let apiList = action.payload.todo;
+    let apiDone = action.payload.done;
+
+    console.log([...state.list, ...apiList]);
+    return {
+      ...state,
+      list: [...state.list, ...apiList],
+      done: [...state.done, ...apiDone],
+    };
+  }
+};
+
 const inputChange = (state, action) => {
   if (action.type === actionTypes.INPUT_CHANGE) {
     return {
@@ -31,7 +45,8 @@ const deleteFromList = (state, action) => {
 };
 
 const addtoDone = (state, action) => {
-  const newList = state.list.filter(item => item !== action.doneItem);
+  const newList = state.list.filter(item => item.name !== action.doneItem.name);
+  console.log(action.doneItem, 111111111);
   const newDoneList = [...state.done, action.doneItem];
   return {
     ...state,
@@ -50,6 +65,8 @@ const deleteFromDone = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.UPDATE_INITIAL_STATE:
+      return updateInitialState(state, action);
     case actionTypes.INPUT_CHANGE:
       return inputChange(state, action);
     case actionTypes.ADD_TO_LIST:
