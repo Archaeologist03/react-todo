@@ -41,7 +41,7 @@ export const addToList = newItem => {
       body: JSON.stringify({ newTodo }),
     })
       .then(res => res.json())
-      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .catch(err => console.log(err));
 
     // Dispatches new item obj to reducer
@@ -52,19 +52,12 @@ export const addToList = newItem => {
   };
 };
 
-export const deleteFromList = itemToDel => {
-  return {
-    type: actionTypes.DELETE_FROM_LIST,
-    itemToDel: itemToDel,
-  };
-};
-
 // Add item from todo/list to done list.
 export const addToDone = doneItem => {
   //  Gets new(clicked todo item) name and creates obj with it and new id.
   const newDone = { id: uuid(), name: doneItem };
 
-  // Send POST req to serve with new done item obj.
+  // Send POST req to server with new done item obj.
   return dispatch => {
     fetch('http://localhost:5000/adddone', {
       method: 'post',
@@ -81,9 +74,42 @@ export const addToDone = doneItem => {
   };
 };
 
+// Delete item from todo/list.
+export const deleteFromList = itemToDel => {
+  // Delete req with id (itemToDel) to be deleted from todo list.
+  return dispatch => {
+    fetch(`http://localhost:5000/deletetodo/${itemToDel}`, {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ itemToDel }),
+    })
+      .then(res => res.json())
+      // .then(res => console.log(res, 'from todo delete'))
+      .catch(err => console.log(err));
+
+    dispatch({
+      type: actionTypes.DELETE_FROM_LIST,
+      itemToDel: itemToDel,
+    });
+  };
+};
+
+// Delete item from done list.
 export const deleteFromDone = itemToDel => {
-  return {
-    type: actionTypes.DELETE_FROM_DONE,
-    itemToDel: itemToDel,
+  // Delete req with id (itemToDel) to be deleted from done list.
+  return dispatch => {
+    fetch(`http://localhost:5000/deletedone/${itemToDel}`, {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ itemToDel }),
+    })
+      .then(res => res.json())
+      // .then(res => console.log(res, 'from done delete'))
+      .catch(err => console.log(err));
+
+    dispatch({
+      type: actionTypes.DELETE_FROM_DONE,
+      itemToDel: itemToDel,
+    });
   };
 };

@@ -15,11 +15,6 @@ class App extends React.Component {
   //   this.handleInputEnter = this.handleInputEnter.bind(this);
   // }
 
-  componentDidUpdate() {
-    console.log(this.props.list);
-    console.log(this.props.done);
-  }
-
   componentDidMount() {
     // Get state from server
     this.props.updateInitialState();

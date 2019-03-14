@@ -11,7 +11,6 @@ const updateInitialState = (state, action) => {
     let apiList = action.payload.todo;
     let apiDone = action.payload.done;
 
-    console.log([...state.list, ...apiList]);
     return {
       ...state,
       list: [...state.list, ...apiList],
@@ -37,7 +36,7 @@ const addToList = (state, action) => {
 };
 
 const deleteFromList = (state, action) => {
-  const newList = state.list.filter(item => item !== action.itemToDel);
+  const newList = state.list.filter(item => item.id !== action.itemToDel);
   return {
     ...state,
     list: newList,
@@ -46,7 +45,6 @@ const deleteFromList = (state, action) => {
 
 const addtoDone = (state, action) => {
   const newList = state.list.filter(item => item.name !== action.doneItem.name);
-  console.log(action.doneItem, 111111111);
   const newDoneList = [...state.done, action.doneItem];
   return {
     ...state,
@@ -56,7 +54,7 @@ const addtoDone = (state, action) => {
 };
 
 const deleteFromDone = (state, action) => {
-  const newDoneList = state.done.filter(item => item !== action.itemToDel);
+  const newDoneList = state.done.filter(item => item.id !== action.itemToDel);
   return {
     ...state,
     done: newDoneList,
