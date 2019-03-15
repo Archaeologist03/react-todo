@@ -8,13 +8,6 @@ import List from './components/List/List';
 import DoneList from './components/DoneList/DoneList';
 
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.handlerBtnSubmit = this.handlerBtnSubmit.bind(this);
-  //   this.handleInputEnter = this.handleInputEnter.bind(this);
-  // }
-
   componentDidMount() {
     // Get state from server
     this.props.updateInitialState();

@@ -1,19 +1,22 @@
 import * as actionTypes from './actionTypes';
 
+import serverEndpoint from '../../assets/utils/serverEndpoint';
+
 const uuid = require('uuid');
 
 // Setting initial state with data from server.
 // Called when app mounts.
 export const updateInitialState = () => {
   return dispatch => {
-    fetch('http://localhost:5000/')
+    fetch(serverEndpoint.baseUrl)
       .then(res => res.json())
       .then(res => {
+        console.log(res.users[0].todo);
         dispatch({
           type: actionTypes.UPDATE_INITIAL_STATE,
           payload: {
-            todo: res.todo,
-            done: res.done,
+            todo: res.users[0].todo,
+            done: res.users[0].done,
           },
         });
       });
@@ -35,7 +38,7 @@ export const addToList = newItem => {
 
   // Send POST req to server with new new item obj.
   return dispatch => {
-    fetch('http://localhost:5000/addtodo', {
+    fetch(`${serverEndpoint.baseUrl}/addtodo`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ newTodo }),
@@ -59,7 +62,7 @@ export const addToDone = doneItem => {
 
   // Send POST req to server with new done item obj.
   return dispatch => {
-    fetch('http://localhost:5000/adddone', {
+    fetch(`${serverEndpoint.baseUrl}/adddone`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ newDone }),
@@ -78,7 +81,7 @@ export const addToDone = doneItem => {
 export const deleteFromList = itemToDel => {
   // Delete req with id (itemToDel) to be deleted from todo list.
   return dispatch => {
-    fetch(`http://localhost:5000/deletetodo/${itemToDel}`, {
+    fetch(`${serverEndpoint.baseUrl}/deletetodo/${itemToDel}`, {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ itemToDel }),
@@ -98,7 +101,7 @@ export const deleteFromList = itemToDel => {
 export const deleteFromDone = itemToDel => {
   // Delete req with id (itemToDel) to be deleted from done list.
   return dispatch => {
-    fetch(`http://localhost:5000/deletedone/${itemToDel}`, {
+    fetch(`${serverEndpoint.baseUrl}/deletedone/${itemToDel}`, {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ itemToDel }),
