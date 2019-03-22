@@ -18,12 +18,14 @@ class App extends React.Component {
     // this prevents empty string to go to server, therefore we lose err message, but cut extra complexity on AC and server.
     if (this.props.text) {
       this.props.onAddToList(this.props.text);
+      // this.props.updateInitialState();
     }
   };
 
   handleInputEnter = e => {
     if (e.key === 'Enter') {
       this.props.onAddToList(this.props.text);
+      // this.props.updateInitialState();
     }
   };
 
@@ -31,14 +33,15 @@ class App extends React.Component {
     return (
       <div className='container'>
         <SubmitForm
-          click={this.handlerBtnSubmit}
+          handlerBtnSubmit={this.handlerBtnSubmit}
           inputText={this.props.text}
           onInputChange={this.props.onInputChange}
-          inputEnter={this.handleInputEnter}
+          handleInputEnter={this.handleInputEnter}
         />
         <div className='listContainer'>
           <h3 className='listContainer__header listHeader'>ToDo:</h3>
           <List
+            updateInitialState={this.props.updateInitialState}
             onDeleteFromList={this.props.onDeleteFromList}
             onAddToDone={this.props.onAddToDone}
             listArr={this.props.list}

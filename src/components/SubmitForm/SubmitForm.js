@@ -11,9 +11,9 @@ function SubmitForm(props) {
         autoFocus={true}
         onChange={props.onInputChange}
         value={props.inputText}
-        onKeyPress={props.inputEnter}
+        onKeyPress={props.handleInputEnter}
       />
-      <button className="submitBtn" type="submit" onClick={props.click}>
+      <button className="submitBtn" type="submit" onClick={props.handlerBtnSubmit}>
         <span className="addBtnText">Add</span>
       </button>
     </div>

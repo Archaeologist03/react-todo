@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 
 import serverEndpoint from '../../assets/utils/serverEndpoint';
 
-const uuid = require('uuid');
+// const uuid = require('uuid');
 
 // Setting initial state with data from server.
 // Called when app mounts.
@@ -11,12 +11,12 @@ export const updateInitialState = () => {
     fetch(serverEndpoint.baseUrl)
       .then(res => res.json())
       .then(res => {
-        console.log(res.users[0].todo);
+        console.log(res);
         dispatch({
           type: actionTypes.UPDATE_INITIAL_STATE,
           payload: {
-            todo: res.users[0].todo,
-            done: res.users[0].done,
+            todo: res.list,
+            done: res.done,
           },
         });
       });
@@ -34,7 +34,7 @@ export const inputChange = text => {
 // Add new item to todo/list array.
 export const addToList = newItem => {
   // Gets item name, makes obj with id and received item name.
-  const newTodo = { id: uuid(), name: newItem };
+  const newTodo = { name: newItem };
 
   // Send POST req to server with new new item obj.
   return dispatch => {
@@ -58,7 +58,7 @@ export const addToList = newItem => {
 // Add item from todo/list to done list.
 export const addToDone = doneItem => {
   //  Gets new(clicked todo item) name and creates obj with it and new id.
-  const newDone = { id: uuid(), name: doneItem };
+  const newDone = { name: doneItem };
 
   // Send POST req to server with new done item obj.
   return dispatch => {
@@ -68,26 +68,29 @@ export const addToDone = doneItem => {
       body: JSON.stringify({ newDone }),
     })
       .then(res => res.json())
+      .then(res => {
+        dispatch({
+          type: actionTypes.ADD_TO_DONE,
+          doneItem: { name: res.item.name },
+        });
+      })
       .catch(err => console.log(err));
-
-    dispatch({
-      type: actionTypes.ADD_TO_DONE,
-      doneItem: newDone,
-    });
   };
 };
 
 // Delete item from todo/list.
 export const deleteFromList = itemToDel => {
+  console.log(itemToDel);
+  
   // Delete req with id (itemToDel) to be deleted from todo list.
   return dispatch => {
-    fetch(`${serverEndpoint.baseUrl}/deletetodo/${itemToDel}`, {
+    fetch(`${serverEndpoint.baseUrl}/deletetodo/${itemToDel.toString()}`, {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ itemToDel }),
     })
       .then(res => res.json())
-      // .then(res => console.log(res, 'from todo delete'))
+      .then(res => console.log(res, 'from todo delete'))
       .catch(err => console.log(err));
 
     dispatch({
