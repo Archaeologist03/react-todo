@@ -33,7 +33,7 @@ export const inputChange = text => {
 
 // Add new item to todo/list array.
 export const addToList = newItem => {
-  // Gets item name, makes obj with id and received item name.
+  // Gets item name, makes obj with received item name.
   const newTodo = { name: newItem };
 
   // Send POST req to server with new new item obj.
@@ -44,20 +44,23 @@ export const addToList = newItem => {
       body: JSON.stringify({ newTodo }),
     })
       .then(res => res.json())
-      // .then(res => console.log(res))
+      .then(res => {
+        // Dispatches new item obj to reducer if item doesn't exist.
+        // if there is a name from server it means item does not exist in db so we add it to ui as well.
+        if (res.name) {
+          dispatch({
+            type: actionTypes.ADD_TO_LIST,
+            newItem: newTodo,
+          });
+        }
+      })
       .catch(err => console.log(err));
-
-    // Dispatches new item obj to reducer
-    dispatch({
-      type: actionTypes.ADD_TO_LIST,
-      newItem: newTodo,
-    });
   };
 };
 
 // Add item from todo/list to done list.
 export const addToDone = doneItem => {
-  //  Gets new(clicked todo item) name and creates obj with it and new id.
+  //  Gets new(clicked todo item) name and creates obj with its name as name property.
   const newDone = { name: doneItem };
 
   // Send POST req to server with new done item obj.
@@ -69,10 +72,19 @@ export const addToDone = doneItem => {
     })
       .then(res => res.json())
       .then(res => {
-        dispatch({
-          type: actionTypes.ADD_TO_DONE,
-          doneItem: { name: res.item.name },
-        });
+        // if there is name that comes from server dispatches it to reducer to add it to done list and remove from list.(todo)
+        if (res.name) {
+          dispatch({
+            type: actionTypes.ADD_TO_DONE,
+            doneItem: { name: res.item.name },
+          });
+          // otherwise sends null to reducer so it can remove it from list(todo) and just not add anything to done.
+        } else {
+          dispatch({
+            type: actionTypes.ADD_TO_DONE,
+            doneItem: { name: null },
+          });
+        }
       })
       .catch(err => console.log(err));
   };
@@ -81,7 +93,7 @@ export const addToDone = doneItem => {
 // Delete item from todo/list.
 export const deleteFromList = itemToDel => {
   console.log(itemToDel);
-  
+
   // Delete req with id (itemToDel) to be deleted from todo list.
   return dispatch => {
     fetch(`${serverEndpoint.baseUrl}/deletetodo/${itemToDel.toString()}`, {
@@ -103,6 +115,7 @@ export const deleteFromList = itemToDel => {
 // Delete item from done list.
 export const deleteFromDone = itemToDel => {
   // Delete req with id (itemToDel) to be deleted from done list.
+  console.log(itemToDel);
   return dispatch => {
     fetch(`${serverEndpoint.baseUrl}/deletedone/${itemToDel}`, {
       method: 'delete',

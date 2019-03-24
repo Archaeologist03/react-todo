@@ -44,8 +44,12 @@ const deleteFromList = (state, action) => {
 };
 
 const addtoDone = (state, action) => {
-  const newList = state.list.filter(item => item.name !== action.doneItem.name);
+  // Check items that are not null and that does not exist on list yet.
+  const newList = state.list.filter(item => {
+    return item.name !== action.doneItem.name && action.doneItem.name !== null;
+  });
   const newDoneList = [...state.done, action.doneItem];
+
   return {
     ...state,
     list: newList,
