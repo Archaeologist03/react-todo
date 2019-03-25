@@ -73,7 +73,7 @@ export const addToDone = doneItem => {
       .then(res => res.json())
       .then(res => {
         // if there is name that comes from server dispatches it to reducer to add it to done list and remove from list.(todo)
-        if (res.name) {
+        if (res.item.name) {
           dispatch({
             type: actionTypes.ADD_TO_DONE,
             doneItem: { name: res.item.name },
