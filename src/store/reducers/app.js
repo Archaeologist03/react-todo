@@ -10,7 +10,6 @@ const updateInitialState = (state, action) => {
   if (action.type === actionTypes.UPDATE_INITIAL_STATE) {
     let apiList = action.payload.todo;
     let apiDone = action.payload.done;
-    console.log(apiDone);
     return {
       ...state,
       list: [...state.list, ...apiList],
@@ -36,7 +35,7 @@ const addToList = (state, action) => {
 };
 
 const deleteFromList = (state, action) => {
-  const newList = state.list.filter(item => item._id !== action.itemToDel);
+  const newList = state.list.filter(item => item._id !== action.itemToDel._id);
   return {
     ...state,
     list: newList,
@@ -49,6 +48,7 @@ const addtoDone = (state, action) => {
     return item.name !== action.doneItem.name && action.doneItem.name !== null;
   });
   const newDoneList = [...state.done, action.doneItem];
+  console.log(newList);
 
   return {
     ...state,
@@ -58,7 +58,9 @@ const addtoDone = (state, action) => {
 };
 
 const deleteFromDone = (state, action) => {
-  const newDoneList = state.done.filter(item => item.id !== action.itemToDel);
+  const newDoneList = state.done.filter(
+    item => item._id !== action.itemToDel._id,
+  );
   return {
     ...state,
     done: newDoneList,

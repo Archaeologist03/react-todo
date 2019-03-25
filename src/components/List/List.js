@@ -11,7 +11,7 @@ function List(props) {
           href='delete'>
           <span
             className='listItemDelete'
-            onClick={() => props.onDeleteFromList(item._id)}>
+            onClick={() => props.onDeleteFromList(item)}>
             Delete
           </span>
         </a>

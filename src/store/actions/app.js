@@ -11,7 +11,6 @@ export const updateInitialState = () => {
     fetch(serverEndpoint.baseUrl)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         dispatch({
           type: actionTypes.UPDATE_INITIAL_STATE,
           payload: {
@@ -45,12 +44,17 @@ export const addToList = newItem => {
     })
       .then(res => res.json())
       .then(res => {
+        // Calls state update, so state receives newest added item _id.
+        updateInitialState();
+        return res;
+      })
+      .then(res => {
         // Dispatches new item obj to reducer if item doesn't exist.
         // if there is a name from server it means item does not exist in db so we add it to ui as well.
         if (res.name) {
           dispatch({
             type: actionTypes.ADD_TO_LIST,
-            newItem: newTodo,
+            newItem: res,
           });
         }
       })
@@ -92,11 +96,9 @@ export const addToDone = doneItem => {
 
 // Delete item from todo/list.
 export const deleteFromList = itemToDel => {
-  console.log(itemToDel);
-
   // Delete req with id (itemToDel) to be deleted from todo list.
   return dispatch => {
-    fetch(`${serverEndpoint.baseUrl}/deletetodo/${itemToDel.toString()}`, {
+    fetch(`${serverEndpoint.baseUrl}/deletetodo/${itemToDel._id.toString()}`, {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ itemToDel }),
@@ -115,15 +117,14 @@ export const deleteFromList = itemToDel => {
 // Delete item from done list.
 export const deleteFromDone = itemToDel => {
   // Delete req with id (itemToDel) to be deleted from done list.
-  console.log(itemToDel);
   return dispatch => {
-    fetch(`${serverEndpoint.baseUrl}/deletedone/${itemToDel}`, {
+    fetch(`${serverEndpoint.baseUrl}/deletedone/${itemToDel._id.toString()}`, {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ itemToDel }),
     })
       .then(res => res.json())
-      // .then(res => console.log(res, 'from done delete'))
+      .then(res => console.log(res, 'from done delete'))
       .catch(err => console.log(err));
 
     dispatch({
