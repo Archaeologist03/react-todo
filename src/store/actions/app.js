@@ -66,7 +66,6 @@ export const addToList = newItem => {
 export const addToDone = doneItem => {
   //  Gets new(clicked todo item) name and creates obj with its name as name property.
   const newDone = { name: doneItem };
-
   // Send POST req to server with new done item obj.
   return dispatch => {
     fetch(`${serverEndpoint.baseUrl}/adddone`, {
@@ -76,17 +75,24 @@ export const addToDone = doneItem => {
     })
       .then(res => res.json())
       .then(res => {
+        updateInitialState();
+        return res;
+      })
+      .then(res => {
         // if there is name that comes from server dispatches it to reducer to add it to done list and remove from list.(todo)
         if (res.item.name) {
+
           dispatch({
             type: actionTypes.ADD_TO_DONE,
-            doneItem: { name: res.item.name },
+            doneItem: res,
+            errMessage: res.errMessage,
           });
           // otherwise sends null to reducer so it can remove it from list(todo) and just not add anything to done.
         } else {
           dispatch({
             type: actionTypes.ADD_TO_DONE,
-            doneItem: { name: null },
+            doneItem: { name: doneItem },
+            errMessage: res.errMessage,
           });
         }
       })
@@ -104,7 +110,6 @@ export const deleteFromList = itemToDel => {
       body: JSON.stringify({ itemToDel }),
     })
       .then(res => res.json())
-      .then(res => console.log(res, 'from todo delete'))
       .catch(err => console.log(err));
 
     dispatch({
@@ -124,7 +129,6 @@ export const deleteFromDone = itemToDel => {
       body: JSON.stringify({ itemToDel }),
     })
       .then(res => res.json())
-      .then(res => console.log(res, 'from done delete'))
       .catch(err => console.log(err));
 
     dispatch({
