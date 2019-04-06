@@ -1,0 +1,41 @@
+.container {
+  width: 75%;
+  height: 65%;
+  border: 10px solid rgba(141, 75, 122, 0.466);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  box-shadow: 2px 6px 12px rgb(141, 75, 122);
+  overflow-y: auto;
+
+  .listContainer {
+  }
+
+  .listHeader {
+    text-align: center;
+  }
+
+  .todoListContainer {
+    border: 2px solid goldenrod;
+    width: 49.5%;
+    position: absolute;
+    left: 0;
+
+    &__header {
+      color: rgb(22, 67, 136);
+    }
+  }
+
+  .doneListContainer {
+    width: 49.5%;
+    position: absolute;
+    right: 0;
+    border: 2px solid gold;
+
+    &__header {
+      color: rgb(5, 94, 45);
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../scss/listItems/listItem.scss';
+
 function List(props) {
   let listMapped = props.listArr.map(item => {
     return item.name ? (
@@ -29,7 +31,7 @@ function List(props) {
     ) : null;
   });
 
-  return <ul>{listMapped}</ul>;
+  return <ul className="todoList-container">{listMapped}</ul>;
 }
 
 export default List;

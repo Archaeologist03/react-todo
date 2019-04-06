@@ -1,0 +1,80 @@
+.todoList-container {
+
+  .listItem {
+  }
+}
+
+.listItem {
+  background-color: rgba(209, 148, 120, 0.596);
+  padding: 10px;
+  list-style-type: none;
+  border: 2px solid sandybrown;
+  // margin-left: -14%;
+
+  .listItemName {
+    /* padding: 5px 35px 5px 5px; */
+    display: inline-block;
+    width: 50%;
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 5%;
+    background: #396afc;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1c32ad, #396afc8f);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2949ff50, #396afc0c);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: gold;
+    font-weight: 600;
+  }
+
+  .listsBtns {
+    transition: 0.3s ease-in-out;
+  }
+  .listsBtns:hover {
+    transform: scale(0.93);
+  }
+
+  .listDeleteLink {
+    /* user-select: none; */
+    position: absolute;
+    left: 49.5%;
+    display: inline-block;
+  }
+
+  .listDoneLink {
+    position: absolute;
+    left: 75%;
+    display: inline-block;
+  }
+
+  .listItemDelete {
+    /* padding: 5px; */
+    border: 2px solid firebrick;
+    border-radius: 15%;
+    color: whitesmoke;
+    background: firebrick;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .listItemDone {
+    border: 2px solid firebrick;
+    border-radius: 15%;
+    color: whitesmoke;
+    background-color: blue;
+    text-align: center;
+    padding: 5px;
+  }
+}
+
+li a {
+  text-decoration: none;
+  padding: 5px;
+  backface-visibility: hidden;
+}
+button {
+  text-decoration: none;
+  padding: 5px;
+  backface-visibility: hidden;
+}

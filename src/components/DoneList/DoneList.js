@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../scss/listItems/listItem.scss';
+
 function DoneList(props) {
   let doneListMapped = props.doneArr.map(listItem => {
     return listItem.name ? (
