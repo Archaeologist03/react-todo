@@ -1,5 +1,4 @@
 .todoList-container {
-
   .listItem {
   }
 }
@@ -14,7 +13,8 @@
   .listItemName {
     /* padding: 5px 35px 5px 5px; */
     display: inline-block;
-    width: 50%;
+    min-width: 30%;
+    max-width: 60%;
     overflow: hidden;
     padding: 5px;
     border-radius: 5%;
@@ -31,38 +31,49 @@
   .listsBtns {
     transition: 0.3s ease-in-out;
   }
-  .listsBtns:hover {
-    transform: scale(0.93);
-  }
+  // .listsBtns:hover {
+  //   transform: scale(0.93);
+  // }
 
   .listDeleteLink {
     /* user-select: none; */
     position: absolute;
-    left: 49.5%;
+    left: 80%;
+    transform: translateX(-100%);
     display: inline-block;
+
+    &:hover {
+      transform: translateX(-100%) scale(0.93);
+    }
   }
 
   .listDoneLink {
     position: absolute;
-    left: 75%;
+    left: 97%;
+    transform: translateX(-100%);
     display: inline-block;
+
+    &:hover {
+      transform: translateX(-100%) scale(0.93);
+    }
   }
 
   .listItemDelete {
     /* padding: 5px; */
-    border: 2px solid firebrick;
+    border: 2px solid rgba(178, 34, 34, 0.651);
     border-radius: 15%;
-    color: whitesmoke;
-    background: firebrick;
+    color: rgb(0, 0, 0);
+    background: rgba(230, 87, 4, 0.753);
     text-align: center;
     padding: 5px;
   }
 
   .listItemDone {
-    border: 2px solid firebrick;
+    border: 2px solid rgba(178, 34, 34, 0.651);
     border-radius: 15%;
     color: whitesmoke;
-    background-color: blue;
+    background-color: rgba(145, 187, 241, 0.534);
+    color: rgb(0, 0, 0);
     text-align: center;
     padding: 5px;
   }

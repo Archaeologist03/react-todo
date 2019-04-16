@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './App.scss';
 
 import * as actions from './store/actions';
 
-import Navigation from './components/Navigation/Navigation';
+// import Navigation from './components/Navigation/Navigation';
 import SubmitForm from './components/SubmitForm/SubmitForm';
 import List from './components/List/List';
 import DoneList from './components/DoneList/DoneList';
@@ -36,34 +36,30 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <Navigation />
-
-        <div className='container'>
-          <SubmitForm
-            handlerBtnSubmit={this.handlerBtnSubmit}
-            inputText={this.props.text}
-            onInputChange={this.props.onInputChange}
-            handleInputEnter={this.handleInputEnter}
+      <div className='container'>
+        <SubmitForm
+          handlerBtnSubmit={this.handlerBtnSubmit}
+          inputText={this.props.text}
+          onInputChange={this.props.onInputChange}
+          handleInputEnter={this.handleInputEnter}
+        />
+        <div className='todoListContainer listContainer'>
+          <h3 className='ltodoListContainer__header listHeader'>ToDo:</h3>
+          <List
+            updateInitialState={this.props.updateInitialState}
+            onDeleteFromList={this.props.onDeleteFromList}
+            onAddToDone={this.props.onAddToDone}
+            listArr={this.props.list}
           />
-          <div className='todoListContainer listContainer'>
-            <h3 className='ltodoListContainer__header listHeader'>ToDo:</h3>
-            <List
-              updateInitialState={this.props.updateInitialState}
-              onDeleteFromList={this.props.onDeleteFromList}
-              onAddToDone={this.props.onAddToDone}
-              listArr={this.props.list}
-            />
-          </div>
-          <div className='doneListContainer listContainer'>
-            <h3 className='doneListContainer__header listHeader'>Done:</h3>
-            <DoneList
-              doneArr={this.props.done}
-              onDeleteFromDone={this.props.onDeleteFromDone}
-            />
-          </div>
         </div>
-      </Router>
+        <div className='doneListContainer listContainer'>
+          <h3 className='doneListContainer__header listHeader'>Done:</h3>
+          <DoneList
+            doneArr={this.props.done}
+            onDeleteFromDone={this.props.onDeleteFromDone}
+          />
+        </div>
+      </div>
     );
   }
 }
