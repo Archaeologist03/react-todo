@@ -1,0 +1,100 @@
+.modal-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: none;
+  border: 2px solid red;
+  min-height: 50vh;
+  height: fit-content;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: rgba(255, 203, 30, 0.87);
+  transition: 1s;
+
+  &__form {
+    position: relative;
+    top: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    &__email-container {
+      margin-bottom: 20px;
+    }
+
+    &__password-container {
+    }
+
+    &__login-button {
+      border: 2px solid rgba(0, 0, 0, 0);
+      margin-top: 30px;
+      width: fit-content;
+      padding: 10px;
+      border-radius: 10%;
+      background-color: tomato;
+      color: whitesmoke;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: bold;
+
+      &:focus {
+        border: 2px solid rgb(240, 234, 234);
+      }
+    }
+  }
+
+  label {
+    display: block;
+    margin: 5px 0;
+    color: orangered;
+  }
+  input {
+    max-width: 100%;
+    border-radius: 5%;
+    color: whitesmoke;
+    padding: 5px;
+    background-color: rgba(255, 68, 0, 0.534);
+    border: 2px solid rgba(240, 234, 234, 0);
+    font-weight: bold;
+  }
+  input::placeholder {
+    color: whitesmoke;
+    font-weight: bold;
+  }
+
+  input:focus {
+    border: 2px solid rgb(240, 234, 234);
+    background-color: rgba(255, 68, 0, 0.719);
+  }
+
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    opacity: 0.6;
+  }
+  &__close:hover {
+    opacity: 1;
+  }
+  &__close:before,
+  &__close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: rgb(85, 5, 5);
+  }
+  &__close:before {
+    transform: rotate(45deg);
+  }
+  &__close:after {
+    transform: rotate(-45deg);
+  }
+}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router,  } from 'react-router-dom';
 
 import './App.scss';
 
-import * as actions from './store/actions';
+import { updateInitialState } from './store/actions/app';
 
-// import Navigation from './components/Navigation/Navigation';
+import Navigation from './components/Navigation/Navigation';
 import SubmitForm from './components/SubmitForm/SubmitForm';
 import List from './components/List/List';
 import DoneList from './components/DoneList/DoneList';
@@ -18,72 +18,37 @@ class App extends React.Component {
     this.props.updateInitialState();
   }
 
-  handlerBtnSubmit = e => {
-    e.preventDefault();
-    // this prevents empty string to go to server, therefore we lose err message, but cut extra complexity on AC and server.
-    if (this.props.text) {
-      this.props.onAddToList(this.props.text);
-      // this.props.updateInitialState();
-    }
-  };
-
-  handleInputEnter = e => {
-    if (e.key === 'Enter') {
-      this.props.onAddToList(this.props.text);
-      // this.props.updateInitialState();
-    }
-  };
-
   render() {
     return (
-      <div className='container'>
-        <SubmitForm
-          handlerBtnSubmit={this.handlerBtnSubmit}
-          inputText={this.props.text}
-          onInputChange={this.props.onInputChange}
-          handleInputEnter={this.handleInputEnter}
-        />
-        <div className='todoListContainer listContainer'>
-          <h3 className='ltodoListContainer__header listHeader'>ToDo:</h3>
-          <List
-            updateInitialState={this.props.updateInitialState}
-            onDeleteFromList={this.props.onDeleteFromList}
-            onAddToDone={this.props.onAddToDone}
-            listArr={this.props.list}
-          />
+      <div className='app-container'>
+        <div className='navigation'>
+          <Router>
+            <Navigation />
+          </Router>
         </div>
-        <div className='doneListContainer listContainer'>
-          <h3 className='doneListContainer__header listHeader'>Done:</h3>
-          <DoneList
-            doneArr={this.props.done}
-            onDeleteFromDone={this.props.onDeleteFromDone}
-          />
+        <div className='todo-box-container'>
+          <SubmitForm />
+          <div className='todoListContainer listContainer'>
+            <h3 className='ltodoListContainer__header listHeader'>ToDo:</h3>
+            <List updateInitialState={this.props.updateInitialState} />
+          </div>
+          <div className='doneListContainer listContainer'>
+            <h3 className='doneListContainer__header listHeader'>Done:</h3>
+            <DoneList />
+          </div>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    text: state.app.text,
-    list: state.app.list,
-    done: state.app.done,
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
-    updateInitialState: () => dispatch(actions.updateInitialState()),
-    onInputChange: text => dispatch(actions.inputChange(text)),
-    onAddToList: newItem => dispatch(actions.addToList(newItem)),
-    onDeleteFromList: item => dispatch(actions.deleteFromList(item)),
-    onAddToDone: doneItem => dispatch(actions.addToDone(doneItem)),
-    onDeleteFromDone: item => dispatch(actions.deleteFromDone(item)),
+    updateInitialState: () => dispatch(updateInitialState()),
   };
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(App);
