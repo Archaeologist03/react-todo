@@ -4,6 +4,9 @@ const initialState = {
   text: '',
   list: [],
   done: [],
+  isAuthenticated: false,
+  user: null,
+  token: localStorage.getItem('token'),
 };
 
 const updateInitialState = (state, action) => {

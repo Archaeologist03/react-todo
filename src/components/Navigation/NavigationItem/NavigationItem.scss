@@ -1,0 +1,20 @@
+.nav-item {
+  border: 2px solid rgb(243, 87, 31);
+  border-radius: 10%;
+  padding: 5px;
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: orangered;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: .7s;
+  margin: 0 10px;
+
+  
+
+  &:hover {
+    background-color: rgba(231, 91, 40, 0.89);
+    color: rgba(245, 245, 245, 0.925);
+    
+  }
+}
+
