@@ -1,6 +1,11 @@
 .navigation-container {
   margin-top: 10px;
 
+  @media screen and (max-width: 600px) {
+    margin-top: 30px;
+    margin-right: -20px;
+  }
+
   &__nav-items-container {
     width: fit-content;
     position: relative;
@@ -23,14 +28,14 @@
     // left: 50%;
     // transform: scale(0) translate(-50%, -50%);
     opacity: 0;
+    transition: 1s;
   }
   .modal-enter-active {
     // position: absolute;
     // top: 50%;
     // left: 50%;
-    // transform: scale(1) translate(-50%, -50%);
     opacity: 1;
-    transition: opacity 1s;
+    transition: 1s;
   }
   .modal-exit {
     // position: absolute;
@@ -38,6 +43,7 @@
     // left: 50%;
     // transform: scale(1) translate(-50%, -50%);
     opacity: 1;
+    transition: 1s;
   }
   .modal-exit-active {
     // position: absolute;
