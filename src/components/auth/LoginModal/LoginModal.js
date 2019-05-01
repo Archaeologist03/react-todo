@@ -33,7 +33,7 @@ const LoginModal = props => {
     if (props.isLogged) {
       props.openModal(false);
       // update url on login to index page
-      props.history.push('/list/');
+      props.history.push('/');
       props.onClearErrors();
     }
   }, [props]);
@@ -41,7 +41,7 @@ const LoginModal = props => {
   const closeModal = () => {
     props.openModal(false);
     // update url on closing(X) to index page
-    props.history.push('/list/');
+    props.history.push('/');
     props.onClearErrors();
   };
 
