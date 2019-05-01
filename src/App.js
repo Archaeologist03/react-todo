@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import { BrowserRouter as Router,  } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import './App.scss';
 
 import { updateInitialState } from './store/actions/app';
+import { loadUser } from './store/actions/authActions';
 
 import Navigation from './components/Navigation/Navigation';
 import SubmitForm from './components/SubmitForm/SubmitForm';
@@ -16,6 +16,8 @@ class App extends React.Component {
   componentDidMount() {
     // Get state from server
     this.props.updateInitialState();
+    // Load user initially(on refresh) if there is ID and TOKEN in localStorage
+    this.props.loadUser();
   }
 
   render() {
@@ -42,13 +44,18 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {};
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     updateInitialState: () => dispatch(updateInitialState()),
+    loadUser: () => dispatch(loadUser()),
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(App);

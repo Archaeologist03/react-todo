@@ -1,12 +1,35 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+import { logoutUser } from '../../../store/actions/authActions';
 
 import './NavigationItem.scss';
 
 function NavigationItem(props) {
+  const openingModal = () => {
+    // if has modal(login/singup) open it, otherwise(logout) null
+    if (props.openModal) {
+      props.openModal(true);
+    } else {
+      return null;
+    }
+  };
+
+  const loggingOut = () => {
+    if (props.loggingOut) {
+      props.onLogoutUser();
+      props.history.push('/list/');
+    }
+  };
+
   return (
     <NavLink
-      onClick={props.openModal ? () => props.openModal(true) : null}
+      onClick={() => {
+        openingModal();
+        loggingOut();
+      }}
       className='nav-item'
       activeClassName='active-nav-item'
       to={props.linkTo}>
@@ -15,4 +38,20 @@ function NavigationItem(props) {
   );
 }
 
-export default NavigationItem;
+const mapStateToProps = state => {
+  return {
+    isLogged: state.app.isLogged,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogoutUser: () => dispatch(logoutUser()),
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(NavigationItem),
+);

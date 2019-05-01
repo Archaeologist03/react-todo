@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { inputChange } from '../../store/actions/app';
+import { inputChange, updateInitialState } from '../../store/actions/app';
 import { addToList } from '../../store/actions/listActions';
 
 import './SubmitForm.scss';
@@ -30,12 +30,9 @@ function SubmitForm(props) {
         onChange={props.onInputChange}
         value={props.text}
         onKeyPress={handleInputEnter}
-        placeholder="Add task"
+        placeholder='Add task'
       />
-      <button
-        className='submitBtn'
-        type='submit'
-        onClick={handlerBtnSubmit}>
+      <button className='submitBtn' type='submit' onClick={handlerBtnSubmit}>
         <span className='addBtnText'>Add</span>
       </button>
     </div>
@@ -50,6 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    updateInitialState: () => dispatch(updateInitialState()),
     onInputChange: text => dispatch(inputChange(text)),
     onAddToList: newItem => dispatch(addToList(newItem)),
   };
