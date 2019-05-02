@@ -11,19 +11,24 @@ export const loadUser = () => async (dispatch, getState) => {
   const currentTokenId = localStorage.getItem('id');
   const stateToken = getState().app.token;
 
-  // if have all proceed to make req for user with id param
-  if (currentToken && currentTokenId && stateToken) {
-    const user = await axios.get(
-      `/auth/loaduser/${currentTokenId}`,
-      tokenConfig(getState),
-    );
+  try {
+    // if have all proceed to make req for user with id param
+    if (currentToken && currentTokenId && stateToken) {
+      const user = await axios.get(
+        `/auth/loaduser/${currentTokenId}`,
+        tokenConfig(getState),
+      );
 
-    if (user) {
-      dispatch({
-        type: actionTypes.LOAD_USER,
-        user: user.data,
-      });
+      if (user) {
+        dispatch({
+          type: actionTypes.LOAD_USER,
+          user: user.data,
+        });
+      }
     }
+  } catch (err) {
+    // TODO# Deal with initial load user(when there is no user) but there is old id/token in localStorage
+    console.log(err);
   }
 };
 

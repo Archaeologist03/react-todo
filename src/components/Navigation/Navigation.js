@@ -48,7 +48,7 @@ function Navigation(props) {
       <div className='navigation-container__nav-items-container'>
         {props.isAuthenticated ? (
           <Fragment>
-            <NavigationItem loggingOut={true} linkTo='/list/'>
+            <NavigationItem loggingOut={true} linkTo='/'>
               Logout
             </NavigationItem>
           </Fragment>

@@ -20,7 +20,7 @@ function NavigationItem(props) {
   const loggingOut = () => {
     if (props.loggingOut) {
       props.onLogoutUser();
-      props.history.push('/list/');
+      props.history.push('/');
     }
   };
 
