@@ -2,8 +2,7 @@ import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
 
-// import serverEndpoint from '../../assets/utils/serverEndpoint';
-// import { updateInitialState } from '../actions/app';
+import { baseUrl } from '../../assets/utils/serverEndpoint';
 
 // LOAD USER
 export const loadUser = () => async (dispatch, getState) => {
@@ -15,7 +14,7 @@ export const loadUser = () => async (dispatch, getState) => {
     // if have all proceed to make req for user with id param
     if (currentToken && currentTokenId && stateToken) {
       const user = await axios.get(
-        `/auth/loaduser/${currentTokenId}`,
+        `${baseUrl}/loaduser/${currentTokenId}`,
         tokenConfig(getState),
       );
 
@@ -50,7 +49,7 @@ export const loginUser = ({ email, password }) => async dispatch => {
   };
   try {
     // Send data to server
-    const resData = await axios.post('/auth/login', bodyData, config);
+    const resData = await axios.post(`${baseUrl}/auth/login`, bodyData, config);
     if (resData.data.token) {
       dispatch({
         type: actionTypes.LOGIN_USER,
@@ -86,7 +85,11 @@ export const signupUser = ({ name, email, password }) => async dispatch => {
 
   try {
     // Send data to server
-    const resData = await axios.post('/auth/signup', bodyData, config);
+    const resData = await axios.post(
+      `${baseUrl}/auth/signup`,
+      bodyData,
+      config,
+    );
     if (resData.data.token) {
       dispatch({
         type: actionTypes.SIGNUP_USER,

@@ -3,8 +3,7 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import { tokenConfig } from '../actions/authActions';
 
-// import serverEndpoint from '../../assets/utils/serverEndpoint';
-// import { updateInitialState } from '../actions/app';
+import { baseUrl } from '../../assets/utils/serverEndpoint';
 
 // Add new item to todo/list array.
 export const addToList = newItem => async (dispatch, getState) => {
@@ -15,7 +14,7 @@ export const addToList = newItem => async (dispatch, getState) => {
   // Send POST req to server with new new item obj.
   try {
     const resData = await axios.post(
-      '/list/addtodo',
+      `${baseUrl}/list/addtodo`,
       reqBody,
       tokenConfig(getState),
     );
@@ -38,7 +37,7 @@ export const deleteFromList = itemToDel => async (dispatch, getState) => {
 
   try {
     await axios.delete(
-      `/list/deletetodo/${itemToDel._id.toString()}`,
+      `${baseUrl}/list/deletetodo/${itemToDel._id.toString()}`,
       tokenConfig(getState),
       reqBody,
     );

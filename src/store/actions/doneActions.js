@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import { tokenConfig } from './authActions';
 
-// import serverEndpoint from '../../assets/utils/serverEndpoint';
+import { baseUrl } from '../../assets/utils/serverEndpoint';
 import { updateInitialState } from '../actions/app';
 
 // ADD ITEM FROM TODO LIST TO DONE LIST
@@ -15,7 +15,7 @@ export const addToDone = doneItem => async (dispatch, getState) => {
   try {
     // Send POST req to server with new done item obj.
     const resData = await axios.post(
-      '/done/adddone',
+      `${baseUrl}/done/adddone`,
       reqBody,
       tokenConfig(getState),
     );
@@ -46,7 +46,7 @@ export const addToDone = doneItem => async (dispatch, getState) => {
 export const deleteFromDone = itemToDel => async (dispatch, getState) => {
   // Delete req with id (itemToDel._id) param to be deleted from done list.
   await axios.delete(
-    `/done/deletedone/${itemToDel._id.toString()}`,
+    `${baseUrl}/done/deletedone/${itemToDel._id.toString()}`,
     tokenConfig(getState),
   );
   dispatch({

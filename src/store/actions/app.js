@@ -2,11 +2,12 @@ import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
 
+import { baseUrl } from '../../assets/utils/serverEndpoint';
 
 // Setting initial state with data from server.
 // Called when app mounts.
 export const updateInitialState = () => async (dispatch, getState) => {
-  const resData = await axios.get('https://react-tasker-api.herokuapp.com');
+  const resData = await axios.get(baseUrl);
 
   dispatch({
     type: actionTypes.UPDATE_INITIAL_STATE,
