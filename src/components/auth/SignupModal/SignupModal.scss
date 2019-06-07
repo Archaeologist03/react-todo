@@ -18,6 +18,7 @@
 
   @media screen and (max-width: 800px) {
     width: 70%;
+    height: 65vh;
   }
 
   @media screen and (max-width: 600px) {
@@ -57,7 +58,6 @@
       transform: translateX(-50%);
       font-weight: bold;
 
-
       &:focus {
         border: 2px solid rgb(240, 234, 234);
       }
@@ -95,6 +95,10 @@
     width: 32px;
     height: 32px;
     opacity: 0.6;
+
+    &:active {
+      opacity: 1;
+    }
   }
   &__close:hover {
     opacity: 1;

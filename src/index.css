@@ -3,11 +3,14 @@ body {
   padding: 0;
   margin: 0;
   height: 100vh;
+  max-height: 100vh;
+  max-width: 100vw;
   background: lightcoral;
   overflow: hidden;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: Ubuntu;
 }
 
 body {
