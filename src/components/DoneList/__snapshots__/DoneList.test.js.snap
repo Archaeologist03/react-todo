@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DoneList should render DoneList with given props(task1) 1`] = `
+<ul>
+  <li
+    className="listItem"
+    key="1"
+  >
+    <span
+      className="listItemName"
+    >
+      task1
+    </span>
+    <a
+      className="listDeleteLink listsBtns"
+      href="delete"
+      onClick={[Function]}
+    >
+      <span
+        className="listItemDelete"
+        onClick={[Function]}
+      >
+        Delete
+      </span>
+    </a>
+  </li>
+</ul>
+`;

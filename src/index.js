@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import appReducer from './store/reducers/appReducer';
 
 import App from './App';
-import './index.css';
+import './index.scss';
 
 const initalState = {};
 
@@ -22,8 +22,6 @@ const store = createStore(
   initalState,
   compose(
     applyMiddleware(...middleware),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    //   window.__REDUX_DEVTOOLS_EXTENSION__(),
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()) ||
       compose,

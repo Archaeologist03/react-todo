@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubmitForm should render SubmitForm without crashing given the required props 1`] = `
+<div
+  className="submit-container"
+>
+  <input
+    autoFocus={true}
+    className="addItemInput"
+    onChange={[MockFunction]}
+    onKeyPress={[Function]}
+    placeholder="Add task"
+    type="text"
+    value=""
+  />
+  <button
+    className="submitBtn"
+    onClick={[Function]}
+    type="submit"
+  >
+    <span
+      className="addBtnText"
+    >
+      Add
+    </span>
+  </button>
+</div>
+`;

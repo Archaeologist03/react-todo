@@ -5,7 +5,7 @@ import { deleteFromDone } from '../../store/actions/doneActions';
 
 import '../../scss/listItems/listItem.scss';
 
-function DoneList(props) {
+export function DoneList(props) {
   let doneListMapped = props.doneArr.map(listItem => {
     return listItem.name ? (
       <li className='listItem' key={listItem.id || Math.random()}>

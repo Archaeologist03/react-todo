@@ -16,6 +16,16 @@ body {
 body {
   background: url('./assets//images/todo-orange.jpg');
   background-size: cover;
+
+  @media (max-width: 1260px) {
+    background: url('./assets//images/todo-orange-mid.jpg');
+    background-size: cover;
+  }
+
+  @media (max-width: 576px) {
+    background: url('./assets//images/todo-orange-small.jpg');
+    background-size: cover;
+  }
 }
 
 * {

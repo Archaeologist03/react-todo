@@ -6,7 +6,7 @@ import { addToDone } from '../../store/actions/doneActions';
 
 import '../../scss/listItems/listItem.scss';
 
-function List(props) {
+export function List(props) {
   let listMapped = props.listArr.map(item => {
     return item.name ? (
       <li className='listItem' key={item.id || Math.random()}>

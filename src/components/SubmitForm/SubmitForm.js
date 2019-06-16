@@ -6,7 +6,7 @@ import { addToList } from '../../store/actions/listActions';
 
 import './SubmitForm.scss';
 
-function SubmitForm(props) {
+export function SubmitForm(props) {
   const handleInputEnter = e => {
     if (e.key === 'Enter') {
       props.onAddToList(props.text);
