@@ -7,7 +7,7 @@ import { logoutUser } from '../../../store/actions/authActions';
 
 import './NavigationItem.scss';
 
-function NavigationItem(props) {
+export function NavigationItem(props) {
   const openingModal = () => {
     // if has modal(login/singup) open it, otherwise(logout) null
     if (props.openModal) {

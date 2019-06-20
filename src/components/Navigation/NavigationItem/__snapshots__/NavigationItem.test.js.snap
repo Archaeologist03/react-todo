@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationItem renders NavigationItem without crashing given the required props 1`] = `
+<NavLink
+  activeClassName="active-nav-item"
+  className="nav-item"
+  onClick={[Function]}
+  to="/login"
+>
+  <span
+    className="nav-text-span"
+  />
+</NavLink>
+`;

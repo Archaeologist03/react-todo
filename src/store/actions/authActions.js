@@ -13,10 +13,9 @@ export const loadUser = () => async (dispatch, getState) => {
   try {
     // if have all proceed to make req for user with id param
     if (currentToken && currentTokenId && stateToken) {
-      const user = await axios.get(
-        `${baseUrl}/loaduser/${currentTokenId}`,
-        tokenConfig(getState),
-      );
+      const url = `${baseUrl}/auth/loaduser/${currentTokenId}`;
+
+      const user = await axios.post(url, tokenConfig(getState));
 
       if (user) {
         dispatch({
@@ -107,6 +106,9 @@ export const signupUser = ({ name, email, password }) => async dispatch => {
 
 // LOGOUT USER
 export const logoutUser = () => {
+  // Clear token on logout so user cant alter items after logout. (non-refresh)
+  axios.defaults.headers.common['x-auth-token'] = null;
+
   return {
     type: actionTypes.LOGOUT_USER,
   };
@@ -116,7 +118,6 @@ export const logoutUser = () => {
 export const tokenConfig = getState => {
   // get token from local storage
   const token = getState().app.token;
-  // const token = localStorage.getItem('token');
 
   // headers
   const config = {
@@ -128,6 +129,8 @@ export const tokenConfig = getState => {
   // if token exists, add it to headers
   if (token) {
     config.headers['x-auth-token'] = token;
+    // ducktapping for loadUser call
+    axios.defaults.headers.common['x-auth-token'] = token;
   }
 
   return config;
